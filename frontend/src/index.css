@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Dark mode default variables */
+  --background: #101417;
+  --surface: #101417;
+  --surface-container: #1c2023;
+  --surface-container-high: #262a2d;
+  --surface-container-highest: #313538;
+  --surface-variant: #313538;
+  --on-background: #e0e3e6;
+  --on-surface: #e0e3e6;
+  --on-surface-variant: #bdc9c7;
+  --outline-variant: #3e4947;
+}
+
+html.light {
+  /* Light mode theme tokens keeping exact palette contrast */
+  --background: #f4f6f8;
+  --surface: #ffffff;
+  --surface-container: #eaeef1;
+  --surface-container-high: #dbe2e6;
+  --surface-container-highest: #d0d8dd;
+  --surface-variant: #e2e8ec;
+  --on-background: #101417;
+  --on-surface: #101417;
+  --on-surface-variant: #445053;
+  --outline-variant: #b0bec5;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+  vertical-align: middle;
+}
+
+/* Custom scrollbar for data tables to maintain industrial feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-container);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #889391;
+}
+
+/* Global button focus states */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #7dd6cd;
+  outline-offset: 1px;
+}

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SAP Integrate - Material Details</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: IBM Plex Sans & Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#262a2d",
+                    "tertiary-fixed": "#ebddfa",
+                    "on-secondary-container": "#f8a47b",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005",
+                    "surface-variant": "#313538",
+                    "secondary-fixed": "#ffdbcb",
+                    "on-tertiary-container": "#f9efff",
+                    "on-secondary-fixed": "#341000",
+                    "on-surface-variant": "#bdc9c7",
+                    "primary-fixed-dim": "#7dd6cd",
+                    "surface": "#101417",
+                    "tertiary-fixed-dim": "#cfc1de",
+                    "surface-container": "#1c2023",
+                    "surface-tint": "#7dd6cd",
+                    "on-primary-container": "#c2fff8",
+                    "primary-fixed": "#9af2e9",
+                    "primary-container": "#147c75",
+                    "on-secondary": "#552102",
+                    "background": "#101417",
+                    "inverse-primary": "#006a64",
+                    "surface-dim": "#101417",
+                    "secondary-container": "#743818",
+                    "on-primary-fixed": "#00201e",
+                    "inverse-surface": "#e0e3e6",
+                    "error-container": "#93000a",
+                    "on-background": "#e0e3e6",
+                    "outline": "#889391",
+                    "tertiary": "#cfc1de",
+                    "surface-container-highest": "#313538",
+                    "outline-variant": "#3e4947",
+                    "surface-container-lowest": "#0b0f11",
+                    "surface-bright": "#363a3d",
+                    "secondary-fixed-dim": "#ffb693",
+                    "primary": "#7dd6cd",
+                    "on-tertiary": "#352c42",
+                    "on-tertiary-fixed-variant": "#4c425a",
+                    "secondary": "#ffb693",
+                    "surface-container-low": "#181c1f",
+                    "on-primary-fixed-variant": "#00504b",
+                    "on-surface": "#e0e3e6",
+                    "on-secondary-fixed-variant": "#713616",
+                    "inverse-on-surface": "#2d3134",
+                    "on-primary": "#003734",
+                    "on-tertiary-fixed": "#20182c",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#756a83"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "element-gap": "12px",
+                    "unit": "4px",
+                    "table-cell-padding": "8px 12px",
+                    "header-height": "56px",
+                    "sidebar-width": "240px"
+            },
+            "fontFamily": {
+                    "display": ["IBM Plex Sans"],
+                    "data-lg": ["IBM Plex Mono"],
+                    "body-lg": ["IBM Plex Sans"],
+                    "headline": ["IBM Plex Sans"],
+                    "data-sm": ["IBM Plex Mono"],
+                    "label": ["IBM Plex Sans"],
+                    "body-sm": ["IBM Plex Sans"]
+            },
+            "fontSize": {
+                    "display": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "data-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-lg": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+                    "headline": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Utility for Material Symbols */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .symbol-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Utilitarian Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101417; /* surface */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3e4947; /* outline-variant */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #889391; /* outline */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<!-- TopAppBar (from JSON) -->
+<header class="fixed top-0 w-full border-b border-outline-variant bg-surface flex justify-between items-center h-header-height px-container-padding z-50">
+<div class="flex items-center gap-element-gap">
+<button class="text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-150 p-1 rounded">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline text-headline font-bold text-primary tracking-wide">SAP INTEGRATE</h1>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container-highest transition-colors duration-150 p-1 rounded">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- NavigationDrawer (Desktop) (from JSON) -->
+<nav class="hidden md:flex flex-col py-4 fixed left-0 top-0 h-full w-sidebar-width border-r border-outline-variant bg-surface-container z-40 pt-[72px] overflow-y-auto">
+<div class="px-container-padding mb-6">
+<h2 class="font-label text-label uppercase tracking-widest text-primary">SAP INVENTORY</h2>
+</div>
+<ul class="flex flex-col gap-1 px-3">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span class="font-label text-label uppercase tracking-widest">Dashboard</span>
+</a>
+</li>
+<!-- Active State: Inventory -->
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT bg-primary-container text-on-primary-container font-bold transition-all duration-200" href="#">
+<span class="material-symbols-outlined symbol-fill text-[18px]">inventory_2</span>
+<span class="font-label text-label uppercase tracking-widest">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+<span class="font-label text-label uppercase tracking-widest">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+<span class="font-label text-label uppercase tracking-widest">Procurement</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+<span class="font-label text-label uppercase tracking-widest">SAP Data</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full pt-[72px] pb-[80px] md:pb-8 md:pl-[264px] pr-container-padding flex flex-col gap-6">
+<!-- Header & Metadata Row -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant pb-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-data-sm text-data-sm text-error uppercase tracking-wider">Critical Status</span>
+</div>
+<h2 class="font-display text-display text-on-surface">MAT-1042</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Brake Assembly - High Performance</p>
+</div>
+<div class="flex flex-wrap gap-x-6 gap-y-2 font-data-sm text-data-sm text-on-surface-variant">
+<div class="flex gap-2">
+<span class="opacity-60">Plant:</span>
+<span class="text-on-surface font-semibold">Bangalore (BLR-01)</span>
+</div>
+<div class="flex gap-2">
+<span class="opacity-60">Storage Loc:</span>
+<span class="text-on-surface font-semibold">A-12-Rack4</span>
+</div>
+<div class="flex gap-2">
+<span class="opacity-60">Last SAP Sync:</span>
+<span class="text-on-surface font-semibold">09:42:15 UTC</span>
+</div>
+</div>
+</section>
+<!-- Summary Metric Block (Bento style grid but utilitarian) -->
+<section class="grid grid-cols-2 md:grid-cols-4 border border-outline-variant bg-surface divide-x divide-y md:divide-y-0 divide-outline-variant">
+<div class="p-4 flex flex-col gap-1">
+<span class="font-label text-label text-on-surface-variant uppercase">Current Stock</span>
+<span class="font-display text-display text-error">18</span>
+</div>
+<div class="p-4 flex flex-col gap-1">
+<span class="font-label text-label text-on-surface-variant uppercase">Min Stock</span>
+<span class="font-display text-display text-on-surface">50</span>
+</div>
+<div class="p-4 flex flex-col gap-1">
+<span class="font-label text-label text-on-surface-variant uppercase">30D Sales</span>
+<span class="font-display text-display text-on-surface">142</span>
+</div>
+<div class="p-4 flex flex-col gap-1 bg-surface-container-low">
+<span class="font-label text-label text-on-surface-variant uppercase">Days Remaining</span>
+<span class="font-display text-display text-error flex items-center gap-2">
+                    09 <span class="material-symbols-outlined text-[20px]">warning</span>
+</span>
+</div>
+</section>
+<!-- Main Grid Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: Chart Area -->
+<div class="lg:col-span-2 flex flex-col gap-0 border border-outline-variant bg-surface">
+<div class="flex justify-between items-center p-3 border-b border-outline-variant bg-surface-container-lowest">
+<h3 class="font-label text-label text-on-surface-variant uppercase tracking-widest">Stock Position (90 Days)</h3>
+<div class="flex gap-4 font-data-sm text-data-sm">
+<div class="flex items-center gap-1"><span class="w-3 h-0.5 bg-primary"></span> Current</div>
+<div class="flex items-center gap-1"><span class="w-3 h-0.5 bg-error border border-dashed border-error"></span> Min</div>
+<div class="flex items-center gap-1"><span class="w-3 h-0.5 bg-outline-variant border border-dashed"></span> Max</div>
+</div>
+</div>
+<!-- Mock Chart Area (Utilitarian SVG) -->
+<div class="relative w-full h-64 p-4 flex flex-col justify-end">
+<!-- Y Axis Labels -->
+<div class="absolute left-2 top-4 bottom-8 flex flex-col justify-between font-data-sm text-data-sm text-on-surface-variant opacity-60">
+<span>150</span>
+<span>100</span>
+<span class="text-error">50</span>
+<span>0</span>
+</div>
+<!-- Grid Lines -->
+<div class="absolute inset-4 left-10 flex flex-col justify-between z-0">
+<div class="border-t border-outline-variant opacity-20 w-full h-0"></div>
+<div class="border-t border-outline-variant opacity-20 w-full h-0"></div>
+<div class="border-t border-error opacity-40 border-dashed w-full h-0"></div> <!-- Min Stock Line -->
+<div class="border-t border-outline-variant opacity-20 w-full h-0"></div>
+</div>
+<!-- SVG Line Chart Mock -->
+<svg class="absolute inset-4 left-10 w-[calc(100%-2.5rem)] h-[calc(100%-2rem)] z-10" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Max Line -->
+<line stroke="#3e4947" stroke-dasharray="2,2" stroke-width="0.5" x1="0" x2="100" y1="20" y2="20"></line>
+<!-- Min Line -->
+<line stroke="#ffb4ab" stroke-dasharray="2,2" stroke-width="0.5" x1="0" x2="100" y1="66" y2="66"></line>
+<!-- Current Stock Line -->
+<polyline fill="none" points="0,40 10,45 20,30 30,50 40,60 50,40 60,70 70,80 80,85 90,90 100,88" stroke="#7dd6cd" stroke-width="1.5"></polyline>
+<!-- Current Data Point -->
+<circle cx="100" cy="88" fill="#7dd6cd" r="2"></circle>
+</svg>
+<!-- X Axis Labels -->
+<div class="absolute bottom-1 left-10 right-4 flex justify-between font-data-sm text-data-sm text-on-surface-variant opacity-60">
+<span>T-90</span>
+<span>T-60</span>
+<span>T-30</span>
+<span>Today</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Actions & Insights -->
+<div class="flex flex-col gap-6">
+<!-- Recommended Replenishment -->
+<div class="bg-primary-container text-on-primary-container p-6 border border-primary flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<h3 class="font-label text-label uppercase tracking-widest opacity-80">Recommended Replenishment</h3>
+<span class="material-symbols-outlined text-[24px]">inventory</span>
+</div>
+<div>
+<span class="font-display text-display text-[32px] leading-tight block">110 units</span>
+</div>
+<p class="font-body-sm text-body-sm opacity-90 border-t border-primary-fixed-dim pt-3 mt-1">
+                        Recommendation based on forecast demand exceeding availability within the next 14 days. Lead time: 5 days.
+                    </p>
+<button class="mt-2 w-full bg-surface text-primary-container font-label text-label uppercase px-4 py-3 border border-surface hover:bg-surface-container-highest transition-colors flex justify-center items-center gap-2">
+<span>Create PR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Analysis Block -->
+<div class="bg-surface-container p-5 border border-outline-variant flex flex-col gap-3 relative overflow-hidden">
+<!-- Subtle AI decorative background element -->
+<div class="absolute -right-8 -top-8 text-tertiary opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">neurology</span>
+</div>
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<h3 class="font-label text-label uppercase tracking-widest">Model Insight</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                        Demand trend indicates a 14% anomalous spike compared to historical Q3 averages for Plant Bangalore. Probability of stockout reaches 98% if replenishment is not initiated prior to Tuesday, 17:00 UTC.
+                    </p>
+</div>
+<!-- Open Orders List (Contextual Data) -->
+<div class="border border-outline-variant bg-surface flex flex-col">
+<div class="p-3 border-b border-outline-variant bg-surface-container-lowest flex justify-between items-center">
+<h3 class="font-label text-label text-on-surface-variant uppercase tracking-widest">Open Purchase Orders</h3>
+<span class="font-data-sm text-data-sm text-on-surface-variant">Qty: 0</span>
+</div>
+<div class="p-6 flex flex-col items-center justify-center text-center gap-2 opacity-60">
+<span class="material-symbols-outlined text-[24px]">receipt_long</span>
+<span class="font-body-sm text-body-sm">No active inbound deliveries.</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) (from JSON) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 z-50 flex justify-around items-center px-2 bg-surface-container border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="font-label text-label text-[10px]">Home</span>
+</a>
+<!-- Active State: Stock -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg px-3 py-1 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined symbol-fill text-[20px]">package_2</span>
+<span class="font-label text-label text-[10px]">Stock</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span class="font-label text-label text-[10px]">Charts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span class="font-label text-label text-[10px]">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]">cloud_sync</span>
+<span class="font-label text-label text-[10px]">Sync</span>
+</a>
+</nav>
+</body></html>

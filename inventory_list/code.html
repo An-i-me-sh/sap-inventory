@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SAP INVENTORY - Inventory List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#262a2d",
+                      "tertiary-fixed": "#ebddfa",
+                      "on-secondary-container": "#f8a47b",
+                      "error": "#ffb4ab",
+                      "on-error": "#690005",
+                      "surface-variant": "#313538",
+                      "secondary-fixed": "#ffdbcb",
+                      "on-tertiary-container": "#f9efff",
+                      "on-secondary-fixed": "#341000",
+                      "on-surface-variant": "#bdc9c7",
+                      "primary-fixed-dim": "#7dd6cd",
+                      "surface": "#101417",
+                      "tertiary-fixed-dim": "#cfc1de",
+                      "surface-container": "#1c2023",
+                      "surface-tint": "#7dd6cd",
+                      "on-primary-container": "#c2fff8",
+                      "primary-fixed": "#9af2e9",
+                      "primary-container": "#147c75",
+                      "on-secondary": "#552102",
+                      "background": "#101417",
+                      "inverse-primary": "#006a64",
+                      "surface-dim": "#101417",
+                      "secondary-container": "#743818",
+                      "on-primary-fixed": "#00201e",
+                      "inverse-surface": "#e0e3e6",
+                      "error-container": "#93000a",
+                      "on-background": "#e0e3e6",
+                      "outline": "#889391",
+                      "tertiary": "#cfc1de",
+                      "surface-container-highest": "#313538",
+                      "outline-variant": "#3e4947",
+                      "surface-container-lowest": "#0b0f11",
+                      "surface-bright": "#363a3d",
+                      "secondary-fixed-dim": "#ffb693",
+                      "primary": "#7dd6cd",
+                      "on-tertiary": "#352c42",
+                      "on-tertiary-fixed-variant": "#4c425a",
+                      "secondary": "#ffb693",
+                      "surface-container-low": "#181c1f",
+                      "on-primary-fixed-variant": "#00504b",
+                      "on-surface": "#e0e3e6",
+                      "on-secondary-fixed-variant": "#713616",
+                      "inverse-on-surface": "#2d3134",
+                      "on-primary": "#003734",
+                      "on-tertiary-fixed": "#20182c",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-container": "#756a83"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-padding": "24px",
+                      "element-gap": "12px",
+                      "unit": "4px",
+                      "table-cell-padding": "8px 12px",
+                      "header-height": "56px",
+                      "sidebar-width": "240px"
+              },
+              "fontFamily": {
+                      "display": [
+                              "IBM Plex Sans"
+                      ],
+                      "data-lg": [
+                              "IBM Plex Mono"
+                      ],
+                      "body-lg": [
+                              "IBM Plex Sans"
+                      ],
+                      "headline": [
+                              "IBM Plex Sans"
+                      ],
+                      "data-sm": [
+                              "IBM Plex Mono"
+                      ],
+                      "label": [
+                              "IBM Plex Sans"
+                      ],
+                      "body-sm": [
+                              "IBM Plex Sans"
+                      ]
+              },
+              "fontSize": {
+                      "display": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "15px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for high-density tables */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101417; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3e4947; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #889391; 
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm font-sans antialiased flex h-screen overflow-hidden">
+<!-- NavigationDrawer (Sidebar) - Desktop Only -->
+<nav class="hidden md:flex flex-col py-4 fixed left-0 top-0 h-full w-sidebar-width border-r border-outline-variant dark:border-outline-variant bg-surface-container dark:bg-surface-container z-40">
+<div class="px-6 mb-8">
+<h1 class="font-headline text-headline text-primary dark:text-primary">SAP INVENTORY</h1>
+</div>
+<div class="flex-1 overflow-y-auto px-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label text-label uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container font-bold transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label text-label uppercase tracking-widest">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">analytics</span>
+<span class="font-label text-label uppercase tracking-widest">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+<span class="font-label text-label uppercase tracking-widest">Procurement</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">sync</span>
+<span class="font-label text-label uppercase tracking-widest">SAP Data</span>
+</a>
+</div>
+</nav>
+<!-- TopAppBar - Mobile Only -->
+<header class="md:hidden flex justify-between items-center h-header-height px-container-padding w-full z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant fixed top-0 w-full transition-colors duration-150">
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-2 -ml-2 rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline text-headline font-bold text-primary dark:text-primary">SAP INTEGRATE</div>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-2 -mr-2 rounded-full">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-sidebar-width pt-[56px] md:pt-0 h-full bg-background relative overflow-hidden pb-[64px] md:pb-0">
+<!-- Header Section -->
+<header class="px-container-padding py-6 border-b border-outline-variant bg-surface flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 shrink-0">
+<div>
+<h2 class="font-display text-display text-on-surface mb-1">Inventory List</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Current stock position across materials and plants.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-transparent border border-outline-variant rounded font-label text-label text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    EXPORT
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary-container border border-primary-container rounded font-label text-label text-on-primary-container hover:bg-inverse-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    NEW ENTRY
+                </button>
+</div>
+</header>
+<!-- Filters Section -->
+<div class="px-container-padding py-4 border-b border-outline-variant bg-surface-container-low shrink-0 flex flex-wrap items-center gap-3">
+<div class="relative min-w-[200px] flex-1 sm:flex-none">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded pl-9 pr-3 py-1.5 font-data-sm text-data-sm text-on-surface focus:border-primary focus:ring-0 placeholder:text-on-surface-variant/50 transition-colors" placeholder="Search ID or Description" type="text"/>
+</div>
+<div class="h-6 w-px bg-outline-variant hidden sm:block"></div>
+<select class="bg-surface-container border border-outline-variant rounded px-3 py-1.5 font-data-sm text-data-sm text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[120px]">
+<option value="">All Plants</option>
+<option value="p1">Plant 1000</option>
+<option value="p2">Plant 2000</option>
+<option value="p3">Plant 3000</option>
+</select>
+<select class="bg-surface-container border border-outline-variant rounded px-3 py-1.5 font-data-sm text-data-sm text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[140px]">
+<option value="">All Categories</option>
+<option value="c1">Raw Materials</option>
+<option value="c2">Finished Goods</option>
+<option value="c3">Packaging</option>
+</select>
+<select class="bg-surface-container border border-outline-variant rounded px-3 py-1.5 font-data-sm text-data-sm text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[120px]">
+<option value="">All Statuses</option>
+<option value="s1">Critical</option>
+<option value="s2">Low</option>
+<option value="s3">Healthy</option>
+<option value="s4">Overstock</option>
+</select>
+<button class="ml-auto text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 font-label text-label">
+<span class="material-symbols-outlined text-[16px]">filter_list_off</span>
+                CLEAR
+            </button>
+</div>
+<!-- Data Table Container -->
+<div class="flex-1 overflow-auto bg-surface-dim">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-high z-10 border-b border-outline-variant shadow-sm">
+<tr>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant font-semibold tracking-wider">Status</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant font-semibold tracking-wider">Material ID</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant font-semibold tracking-wider">Description</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant font-semibold tracking-wider">Plant</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant font-semibold tracking-wider text-right">Current Stock</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant font-semibold tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1: Critical -->
+<tr class="hover:bg-surface-container-highest transition-colors group">
+<td class="p-table-cell-padding align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-error-container/20 text-error border border-error/30">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                Critical
+                            </span>
+</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface">MAT-8921-A</td>
+<td class="p-table-cell-padding align-middle font-body-sm text-body-sm text-on-surface-variant">Industrial Grade Titanium Alloy</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface-variant">Plant 1000</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface text-right font-medium">12 <span class="text-on-surface-variant ml-1">kg</span></td>
+<td class="p-table-cell-padding align-middle text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-all px-2">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Low -->
+<tr class="hover:bg-surface-container-highest transition-colors group">
+<td class="p-table-cell-padding align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-secondary-container/20 text-secondary border border-secondary/30">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                Low
+                            </span>
+</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface">MAT-4412-B</td>
+<td class="p-table-cell-padding align-middle font-body-sm text-body-sm text-on-surface-variant">Synthetic Lubricant V2</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface-variant">Plant 2000</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface text-right font-medium">450 <span class="text-on-surface-variant ml-1">L</span></td>
+<td class="p-table-cell-padding align-middle text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-all px-2">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Healthy -->
+<tr class="hover:bg-surface-container-highest transition-colors group">
+<td class="p-table-cell-padding align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary-container/20 text-primary border border-primary/30">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                Healthy
+                            </span>
+</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface">PKG-1102-X</td>
+<td class="p-table-cell-padding align-middle font-body-sm text-body-sm text-on-surface-variant">Standard Shipping Cartons (Large)</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface-variant">Plant 1000</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface text-right font-medium">5,200 <span class="text-on-surface-variant ml-1">ea</span></td>
+<td class="p-table-cell-padding align-middle text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-all px-2">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Overstock -->
+<tr class="hover:bg-surface-container-highest transition-colors group">
+<td class="p-table-cell-padding align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-container-highest border border-outline-variant text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                Overstock
+                            </span>
+</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface">RAW-7734-C</td>
+<td class="p-table-cell-padding align-middle font-body-sm text-body-sm text-on-surface-variant">Copper Wiring (0.5mm)</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface-variant">Plant 3000</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface text-right font-medium">18,400 <span class="text-on-surface-variant ml-1">m</span></td>
+<td class="p-table-cell-padding align-middle text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-all px-2">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Healthy -->
+<tr class="hover:bg-surface-container-highest transition-colors group">
+<td class="p-table-cell-padding align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary-container/20 text-primary border border-primary/30">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                Healthy
+                            </span>
+</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface">MAT-5521-D</td>
+<td class="p-table-cell-padding align-middle font-body-sm text-body-sm text-on-surface-variant">Silicon Wafers (300mm)</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface-variant">Plant 2000</td>
+<td class="p-table-cell-padding align-middle font-data-sm text-data-sm text-on-surface text-right font-medium">850 <span class="text-on-surface-variant ml-1">ea</span></td>
+<td class="p-table-cell-padding align-middle text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-all px-2">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+<!-- BottomNavBar - Mobile Only -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 z-50 flex justify-around items-center px-2 bg-surface-container dark:bg-surface-container border-t border-outline-variant dark:border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">grid_view</span>
+<span class="font-label text-label">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container rounded-lg px-3 py-1 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">package_2</span>
+<span class="font-label text-label">Stock</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">trending_up</span>
+<span class="font-label text-label">Charts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">receipt_long</span>
+<span class="font-label text-label">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">cloud_sync</span>
+<span class="font-label text-label">Sync</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SAP INVENTORY - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#262a2d",
+                    "tertiary-fixed": "#ebddfa",
+                    "on-secondary-container": "#f8a47b",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005",
+                    "surface-variant": "#313538",
+                    "secondary-fixed": "#ffdbcb",
+                    "on-tertiary-container": "#f9efff",
+                    "on-secondary-fixed": "#341000",
+                    "on-surface-variant": "#bdc9c7",
+                    "primary-fixed-dim": "#7dd6cd",
+                    "surface": "#101417",
+                    "tertiary-fixed-dim": "#cfc1de",
+                    "surface-container": "#1c2023",
+                    "surface-tint": "#7dd6cd",
+                    "on-primary-container": "#c2fff8",
+                    "primary-fixed": "#9af2e9",
+                    "primary-container": "#147c75",
+                    "on-secondary": "#552102",
+                    "background": "#101417",
+                    "inverse-primary": "#006a64",
+                    "surface-dim": "#101417",
+                    "secondary-container": "#743818",
+                    "on-primary-fixed": "#00201e",
+                    "inverse-surface": "#e0e3e6",
+                    "error-container": "#93000a",
+                    "on-background": "#e0e3e6",
+                    "outline": "#889391",
+                    "tertiary": "#cfc1de",
+                    "surface-container-highest": "#313538",
+                    "outline-variant": "#3e4947",
+                    "surface-container-lowest": "#0b0f11",
+                    "surface-bright": "#363a3d",
+                    "secondary-fixed-dim": "#ffb693",
+                    "primary": "#7dd6cd",
+                    "on-tertiary": "#352c42",
+                    "on-tertiary-fixed-variant": "#4c425a",
+                    "secondary": "#ffb693",
+                    "surface-container-low": "#181c1f",
+                    "on-primary-fixed-variant": "#00504b",
+                    "on-surface": "#e0e3e6",
+                    "on-secondary-fixed-variant": "#713616",
+                    "inverse-on-surface": "#2d3134",
+                    "on-primary": "#003734",
+                    "on-tertiary-fixed": "#20182c",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#756a83"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "element-gap": "12px",
+                    "unit": "4px",
+                    "table-cell-padding": "8px 12px",
+                    "header-height": "56px",
+                    "sidebar-width": "240px"
+            },
+            "fontFamily": {
+                    "display": ["IBM Plex Sans"],
+                    "data-lg": ["IBM Plex Mono"],
+                    "body-lg": ["IBM Plex Sans"],
+                    "headline": ["IBM Plex Sans"],
+                    "data-sm": ["IBM Plex Mono"],
+                    "label": ["IBM Plex Sans"],
+                    "body-sm": ["IBM Plex Sans"]
+            },
+            "fontSize": {
+                    "display": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "data-lg": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-lg": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+                    "headline": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+        }
+        /* Custom scrollbar for data tables to maintain industrial feel */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #1c2023; }
+        ::-webkit-scrollbar-thumb { background: #3e4947; border-radius: 0px; }
+        ::-webkit-scrollbar-thumb:hover { background: #889391; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm text-body-sm flex h-screen overflow-hidden antialiased">
+<!-- NAVIGATION DRAWER (DESKTOP) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-sidebar-width bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant py-4 z-40 transition-all duration-200">
+<div class="px-container-padding mb-8 flex items-center h-header-height mt-[-16px] border-b border-outline-variant">
+<span class="font-headline text-headline text-primary dark:text-primary tracking-wide">SAP INVENTORY</span>
+</div>
+<div class="flex flex-col px-3 gap-1">
+<a class="flex items-center gap-4 px-4 py-2.5 rounded-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary">dashboard</span>
+<span class="font-label text-label uppercase tracking-widest">Dashboard</span>
+</a>
+<!-- ACTIVE STATE -->
+<a class="flex items-center gap-4 px-4 py-2.5 rounded-sm bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container font-bold border-l-2 border-primary" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label text-label uppercase tracking-widest">Inventory</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-2.5 rounded-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary">analytics</span>
+<span class="font-label text-label uppercase tracking-widest">Analytics</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-2.5 rounded-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary">shopping_cart</span>
+<span class="font-label text-label uppercase tracking-widest">Procurement</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-2.5 rounded-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary">sync</span>
+<span class="font-label text-label uppercase tracking-widest">SAP Data</span>
+</a>
+</div>
+</nav>
+<!-- MAIN CONTENT AREA -->
+<div class="flex-1 flex flex-col min-w-0 md:ml-sidebar-width pb-16 md:pb-0">
+<!-- TOP APP BAR -->
+<header class="flex justify-between items-center h-header-height px-container-padding w-full z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant sticky top-0">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-primary dark:text-primary transition-colors duration-150 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-1.5 rounded-sm">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline text-headline font-bold text-primary dark:text-primary tracking-tight">SAP INTEGRATE</div>
+</div>
+<button class="text-primary dark:text-primary transition-colors duration-150 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-1.5 rounded-sm">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- SCROLLABLE CANVAS -->
+<main class="flex-1 overflow-y-auto bg-background">
+<!-- HEADER SECTION -->
+<div class="px-container-padding py-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 bg-surface border-b border-outline-variant">
+<div>
+<h1 class="font-display text-display text-on-surface mb-1">Inventory Overview</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Current inventory position and operational alerts.</p>
+</div>
+<div class="flex items-center gap-2 text-primary font-data-sm text-data-sm bg-primary-container/10 px-3 py-1.5 rounded-sm border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">cloud_sync</span>
+<span>SAP Connected | Last sync 2 min ago</span>
+</div>
+</div>
+<!-- METRICS ROW (Utilitarian Blocks) -->
+<div class="bg-surface border-b border-outline-variant flex flex-col md:flex-row w-full">
+<!-- Metric 1 -->
+<div class="flex-1 p-6 border-b md:border-b-0 md:border-r border-outline-variant flex flex-col justify-center">
+<div class="font-label text-label text-on-surface-variant uppercase tracking-widest mb-2">Current Inventory</div>
+<div class="font-display text-display text-on-surface font-mono tracking-tight">
+                        54,320 <span class="font-data-sm text-data-sm text-on-surface-variant ml-1">units</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="flex-1 p-6 border-b md:border-b-0 md:border-r border-outline-variant flex flex-col justify-center">
+<div class="font-label text-label text-on-surface-variant uppercase tracking-widest mb-2">Total Value</div>
+<div class="font-display text-display text-on-surface font-mono tracking-tight">
+                        ₹18.7 <span class="font-data-sm text-data-sm text-on-surface-variant ml-1">Cr</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="flex-1 p-6 border-b md:border-b-0 md:border-r border-outline-variant flex flex-col justify-center bg-error-container/5 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="font-label text-label text-error uppercase tracking-widest mb-2">Low Stock Alerts</div>
+<div class="font-display text-display text-error font-mono tracking-tight">
+                        127
+                    </div>
+</div>
+<!-- Metric 4 -->
+<div class="flex-1 p-6 flex flex-col justify-center">
+<div class="font-label text-label text-on-surface-variant uppercase tracking-widest mb-2">Est. Replenishment</div>
+<div class="font-display text-display text-on-surface font-mono tracking-tight">
+                        ₹4.82 <span class="font-data-sm text-data-sm text-on-surface-variant ml-1">Cr</span>
+</div>
+</div>
+</div>
+<!-- COMPACT GRID LAYOUT -->
+<div class="p-container-padding grid grid-cols-1 md:grid-cols-12 gap-element-gap">
+<!-- INVENTORY HEALTH CHART -->
+<div class="col-span-1 md:col-span-8 border border-outline-variant bg-surface flex flex-col">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-label text-label text-on-surface uppercase tracking-widest">Inventory Health (30D)</h2>
+<span class="material-symbols-outlined text-outline text-[16px]">show_chart</span>
+</div>
+<div class="p-4 flex-1 min-h-[200px] relative">
+<!-- Abstracted SVG Line Chart -->
+<svg class="absolute inset-4 w-[calc(100%-2rem)] h-[calc(100%-2rem)] overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Grid lines -->
+<line class="text-outline-variant/50" stroke="currentColor" stroke-dasharray="2 2" stroke-width="0.5" x1="0" x2="100" y1="25" y2="25"></line>
+<line class="text-outline-variant/50" stroke="currentColor" stroke-dasharray="2 2" stroke-width="0.5" x1="0" x2="100" y1="50" y2="50"></line>
+<line class="text-outline-variant/50" stroke="currentColor" stroke-dasharray="2 2" stroke-width="0.5" x1="0" x2="100" y1="75" y2="75"></line>
+<!-- Data Line (Muted Teal / Primary) -->
+<polyline class="text-primary" fill="none" points="0,80 10,75 20,85 30,60 40,65 50,40 60,45 70,20 80,30 90,10 100,15" stroke="currentColor" stroke-width="2"></polyline>
+<!-- Baseline -->
+<line class="text-outline-variant" stroke="currentColor" stroke-width="1" x1="0" x2="100" y1="100" y2="100"></line>
+<!-- Highest Point Indicator -->
+<circle class="text-primary" cx="90" cy="10" fill="currentColor" r="3"></circle>
+<text class="text-on-surface" fill="currentColor" font-family="IBM Plex Mono" font-size="4" text-anchor="middle" x="90" y="5">PEAK</text>
+</svg>
+</div>
+</div>
+<!-- STOCK ALERTS LIST -->
+<div class="col-span-1 md:col-span-4 border border-outline-variant bg-surface flex flex-col">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-label text-label text-on-surface uppercase tracking-widest">Action Required</h2>
+<span class="font-data-sm text-data-sm text-on-surface-variant">3 Items</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center bg-error/5 hover:bg-error/10 transition-colors cursor-pointer">
+<div class="flex flex-col">
+<span class="font-data-lg text-data-lg text-on-surface">MAT-1042</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Actuator Assembly</span>
+</div>
+<span class="font-label text-label text-error uppercase border border-error/30 px-2 py-0.5 rounded-sm">Critical</span>
+</div>
+<div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center bg-secondary/5 hover:bg-secondary/10 transition-colors cursor-pointer">
+<div class="flex flex-col">
+<span class="font-data-lg text-data-lg text-on-surface">MAT-2031</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Seal Ring 40mm</span>
+</div>
+<span class="font-label text-label text-secondary uppercase border border-secondary/30 px-2 py-0.5 rounded-sm">Low Stock</span>
+</div>
+<div class="px-4 py-3 flex justify-between items-center bg-error/5 hover:bg-error/10 transition-colors cursor-pointer">
+<div class="flex flex-col">
+<span class="font-data-lg text-data-lg text-on-surface">MAT-3318</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Control Valve P2</span>
+</div>
+<span class="font-label text-label text-error uppercase border border-error/30 px-2 py-0.5 rounded-sm">Critical</span>
+</div>
+</div>
+</div>
+<!-- DEMAND FORECAST AREA CHART -->
+<div class="col-span-1 md:col-span-12 border border-outline-variant bg-surface flex flex-col mt-4">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-label text-label text-on-surface uppercase tracking-widest">Demand Forecast (90D)</h2>
+<span class="font-data-sm text-data-sm text-outline border border-outline/30 px-2 py-0.5 rounded-sm">Confidence Range: ±8%</span>
+</div>
+<div class="p-4 h-64 relative">
+<!-- Abstracted SVG Area Chart -->
+<svg class="absolute inset-4 w-[calc(100%-2rem)] h-[calc(100%-2rem)] overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Confidence Band (Muted Plum / Tertiary) -->
+<polygon class="text-tertiary/10" fill="currentColor" points="0,95 20,88 40,75 60,80 80,55 100,60 100,100 0,100"></polygon>
+<!-- Main Projection Line -->
+<polyline class="text-tertiary" fill="none" points="0,90 20,82 40,68 60,74 80,48 100,52" stroke="currentColor" stroke-width="2"></polyline>
+<!-- Baseline -->
+<line class="text-outline-variant" stroke="currentColor" stroke-width="1" x1="0" x2="100" y1="100" y2="100"></line>
+<!-- Future Marker Line -->
+<line class="text-outline" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1" x1="50" x2="50" y1="0" y2="100"></line>
+<text class="text-outline" fill="currentColor" font-family="IBM Plex Mono" font-size="4" x="52" y="10">TODAY</text>
+</svg>
+</div>
+</div>
+<!-- FAST MOVING MATERIALS TABLE -->
+<div class="col-span-1 md:col-span-12 border border-outline-variant bg-surface mt-4 overflow-x-auto">
+<div class="p-4 border-b border-outline-variant">
+<h2 class="font-label text-label text-on-surface uppercase tracking-widest">Fast Moving Materials</h2>
+</div>
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead>
+<tr class="bg-surface-container font-label text-label text-on-surface-variant uppercase tracking-widest">
+<th class="p-table-cell-padding font-normal border-b border-outline-variant w-1/4">Material ID</th>
+<th class="p-table-cell-padding font-normal border-b border-outline-variant w-1/4">Description</th>
+<th class="p-table-cell-padding font-normal border-b border-outline-variant text-right w-1/6">30D Sales Vol.</th>
+<th class="p-table-cell-padding font-normal border-b border-outline-variant text-right w-1/6">Current Stock</th>
+<th class="p-table-cell-padding font-normal border-b border-outline-variant text-right w-1/6">Coverage</th>
+</tr>
+</thead>
+<tbody class="font-data-sm text-data-sm text-on-surface">
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="p-table-cell-padding border-b border-outline-variant text-primary group-hover:underline">MAT-9921</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-on-surface-variant">Industrial Lubricant 50L</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono">12,450</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono text-secondary">2,100</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono">5 Days</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="p-table-cell-padding border-b border-outline-variant text-primary group-hover:underline">MAT-8442</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-on-surface-variant">Standard Fastener Pack</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono">9,820</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono">15,000</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono text-outline">45 Days</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="p-table-cell-padding border-b border-outline-variant text-primary group-hover:underline">MAT-7100</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-on-surface-variant">Sensor Module V2</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono">8,105</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono text-error">800</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono text-error">3 Days</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="p-table-cell-padding border-b border-outline-variant text-primary group-hover:underline">MAT-5520</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-on-surface-variant">Copper Wiring Bundle</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono">6,400</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono">4,200</td>
+<td class="p-table-cell-padding border-b border-outline-variant text-right font-mono">19 Days</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+<!-- BOTTOM NAV BAR (MOBILE) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 z-50 flex justify-around items-center px-2 bg-surface-container dark:bg-surface-container border-t border-outline-variant dark:border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="font-label text-label mt-1">Home</span>
+</a>
+<!-- ACTIVE STATE (Mapped "Inventory" to "Stock") -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container rounded-sm px-4 py-1 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">package_2</span>
+<span class="font-label text-label mt-1">Stock</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span class="font-label text-label mt-1">Charts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span class="font-label text-label mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]">cloud_sync</span>
+<span class="font-label text-label mt-1">Sync</span>
+</a>
+</nav>
+</body></html>

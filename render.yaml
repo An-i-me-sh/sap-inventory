@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: sap-inventory-backend
+    env: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && gunicorn -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sap-inventory-db
+          property: connectionString
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: PYTHON_VERSION
+        value: "3.10.11"
+
+  - type: web
+    name: sap-inventory-frontend
+    env: static
+    buildCommand: "cd frontend && npm install && npm run build"
+    staticPublishPath: "./frontend/dist"
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: "https://sap-inventory-backend.onrender.com/api"
+
+databases:
+  - name: sap-inventory-db
+    databaseName: sap_inventory
+    user: sap_admin

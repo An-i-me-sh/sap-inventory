@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SAP Integration</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#262a2d",
+                        "tertiary-fixed": "#ebddfa",
+                        "on-secondary-container": "#f8a47b",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "surface-variant": "#313538",
+                        "secondary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f9efff",
+                        "on-secondary-fixed": "#341000",
+                        "on-surface-variant": "#bdc9c7",
+                        "primary-fixed-dim": "#7dd6cd",
+                        "surface": "#101417",
+                        "tertiary-fixed-dim": "#cfc1de",
+                        "surface-container": "#1c2023",
+                        "surface-tint": "#7dd6cd",
+                        "on-primary-container": "#c2fff8",
+                        "primary-fixed": "#9af2e9",
+                        "primary-container": "#147c75",
+                        "on-secondary": "#552102",
+                        "background": "#101417",
+                        "inverse-primary": "#006a64",
+                        "surface-dim": "#101417",
+                        "secondary-container": "#743818",
+                        "on-primary-fixed": "#00201e",
+                        "inverse-surface": "#e0e3e6",
+                        "error-container": "#93000a",
+                        "on-background": "#e0e3e6",
+                        "outline": "#889391",
+                        "tertiary": "#cfc1de",
+                        "surface-container-highest": "#313538",
+                        "outline-variant": "#3e4947",
+                        "surface-container-lowest": "#0b0f11",
+                        "surface-bright": "#363a3d",
+                        "secondary-fixed-dim": "#ffb693",
+                        "primary": "#7dd6cd",
+                        "on-tertiary": "#352c42",
+                        "on-tertiary-fixed-variant": "#4c425a",
+                        "secondary": "#ffb693",
+                        "surface-container-low": "#181c1f",
+                        "on-primary-fixed-variant": "#00504b",
+                        "on-surface": "#e0e3e6",
+                        "on-secondary-fixed-variant": "#713616",
+                        "inverse-on-surface": "#2d3134",
+                        "on-primary": "#003734",
+                        "on-tertiary-fixed": "#20182c",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#756a83"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "element-gap": "12px",
+                        "unit": "4px",
+                        "table-cell-padding": "8px 12px",
+                        "header-height": "56px",
+                        "sidebar-width": "240px"
+                    },
+                    "fontFamily": {
+                        "display": ["IBM Plex Sans", "sans-serif"],
+                        "data-lg": ["IBM Plex Mono", "monospace"],
+                        "body-lg": ["IBM Plex Sans", "sans-serif"],
+                        "headline": ["IBM Plex Sans", "sans-serif"],
+                        "data-sm": ["IBM Plex Mono", "monospace"],
+                        "label": ["IBM Plex Sans", "sans-serif"],
+                        "body-sm": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "display": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-lg": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-lg": ["15px", { "lineHeight": "22px", "fontWeight": "400" }],
+                        "headline": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "data-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "label": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Base typography reset for data-centric UI */
+        body {
+            font-feature-settings: "tnum" on, "lnum" on;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm min-h-screen pt-header-height pb-16 md:pb-0 md:pl-sidebar-width flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant transition-colors duration-150 flex justify-between items-center h-header-height px-container-padding">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-primary dark:text-primary hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-2 rounded transition-colors duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline text-headline font-bold text-primary dark:text-primary">SAP INTEGRATE</span>
+</div>
+<button class="text-primary dark:text-primary hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-2 rounded transition-colors duration-150">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- NavigationDrawer (Desktop) -->
+<aside class="hidden md:flex flex-col py-4 fixed left-0 top-0 h-full w-sidebar-width z-40 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant transition-all duration-200 pt-[calc(var(--spacing-header-height)+1rem)]">
+<div class="px-container-padding mb-6">
+<span class="font-headline text-headline text-primary dark:text-primary uppercase tracking-widest font-label text-label">SAP INVENTORY</span>
+</div>
+<nav class="flex flex-col gap-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest font-label text-label uppercase tracking-widest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest font-label text-label uppercase tracking-widest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest font-label text-label uppercase tracking-widest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest font-label text-label uppercase tracking-widest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+                Procurement
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container font-bold hover:bg-surface-container-highest dark:hover:bg-surface-container-highest font-label text-label uppercase tracking-widest transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+                SAP Data
+            </a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-container-padding flex flex-col gap-8">
+<!-- Page Header & Action -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="font-display text-display text-on-surface">Integration Overview</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manage and monitor core ERP synchronization protocols.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label text-label uppercase px-4 py-2 rounded-none flex items-center gap-2 hover:bg-primary transition-colors border border-primary-container">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                Refresh System Connection
+            </button>
+</div>
+<!-- System Info Metric Block -->
+<div class="flex flex-col sm:flex-row border border-outline-variant bg-surface-container-low rounded-none">
+<div class="flex-1 p-4 border-b sm:border-b-0 sm:border-r border-outline-variant flex flex-col justify-center gap-1">
+<span class="font-label text-label text-on-surface-variant uppercase">System</span>
+<span class="font-data-lg text-data-lg text-on-surface">S4H-DEV</span>
+</div>
+<div class="flex-1 p-4 border-b sm:border-b-0 sm:border-r border-outline-variant flex flex-col justify-center gap-1">
+<span class="font-label text-label text-on-surface-variant uppercase">Client</span>
+<span class="font-data-lg text-data-lg text-on-surface">100</span>
+</div>
+<div class="flex-1 p-4 border-b sm:border-b-0 sm:border-r border-outline-variant flex flex-col justify-center gap-1">
+<span class="font-label text-label text-on-surface-variant uppercase">Environment</span>
+<span class="font-data-lg text-data-lg text-on-surface">Development</span>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-center gap-1 bg-surface-container">
+<span class="font-label text-label text-on-surface-variant uppercase">Status</span>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[14px]">link</span>
+<span class="font-data-lg text-data-lg">Connected</span>
+</div>
+</div>
+</div>
+<!-- Data Sources Table Section -->
+<section class="flex flex-col gap-4">
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<h2 class="font-headline text-headline text-on-surface">Data Sources</h2>
+</div>
+<div class="w-full overflow-x-auto border border-outline-variant bg-surface">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant whitespace-nowrap">Source</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant text-right whitespace-nowrap">Records</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant whitespace-nowrap">Last Sync</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant whitespace-nowrap">Status</th>
+</tr>
+</thead>
+<tbody class="font-data-sm text-data-sm text-on-surface">
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors">
+<td class="p-table-cell-padding whitespace-nowrap">Material Master</td>
+<td class="p-table-cell-padding text-right whitespace-nowrap text-on-surface-variant">14,205</td>
+<td class="p-table-cell-padding whitespace-nowrap text-on-surface-variant">2023-10-24 08:15:00</td>
+<td class="p-table-cell-padding whitespace-nowrap">
+<span class="text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check_circle</span> Optimized</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors">
+<td class="p-table-cell-padding whitespace-nowrap">Inventory</td>
+<td class="p-table-cell-padding text-right whitespace-nowrap text-on-surface-variant">89,432</td>
+<td class="p-table-cell-padding whitespace-nowrap text-on-surface-variant">2023-10-24 08:30:12</td>
+<td class="p-table-cell-padding whitespace-nowrap">
+<span class="text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">sync</span> Syncing</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors">
+<td class="p-table-cell-padding whitespace-nowrap">Sales</td>
+<td class="p-table-cell-padding text-right whitespace-nowrap text-on-surface-variant">3,190</td>
+<td class="p-table-cell-padding whitespace-nowrap text-on-surface-variant">2023-10-23 23:55:00</td>
+<td class="p-table-cell-padding whitespace-nowrap">
+<span class="text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> Pending</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="p-table-cell-padding whitespace-nowrap">Purchase Orders</td>
+<td class="p-table-cell-padding text-right whitespace-nowrap text-on-surface-variant">1,844</td>
+<td class="p-table-cell-padding whitespace-nowrap text-on-surface-variant">2023-10-24 07:00:00</td>
+<td class="p-table-cell-padding whitespace-nowrap">
+<span class="text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check_circle</span> Optimized</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Sync Monitor Section -->
+<section class="flex flex-col gap-4">
+<div class="flex justify-between items-end border-b border-outline-variant pb-2">
+<h2 class="font-headline text-headline text-on-surface">Sync Monitor</h2>
+</div>
+<div class="w-full overflow-x-auto border border-outline-variant bg-surface">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant whitespace-nowrap w-48">Timestamp</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant whitespace-nowrap">Source</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant whitespace-nowrap">Operation</th>
+<th class="p-table-cell-padding font-label text-label uppercase text-on-surface-variant whitespace-nowrap w-32">Status</th>
+</tr>
+</thead>
+<tbody class="font-data-sm text-data-sm text-on-surface">
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors">
+<td class="p-table-cell-padding whitespace-nowrap text-on-surface-variant">2023-10-24T08:30:12Z</td>
+<td class="p-table-cell-padding whitespace-nowrap">Inventory</td>
+<td class="p-table-cell-padding whitespace-nowrap">DELTA_EXTRACT</td>
+<td class="p-table-cell-padding whitespace-nowrap text-secondary">Running</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors">
+<td class="p-table-cell-padding whitespace-nowrap text-on-surface-variant">2023-10-24T08:15:00Z</td>
+<td class="p-table-cell-padding whitespace-nowrap">Material Master</td>
+<td class="p-table-cell-padding whitespace-nowrap">FULL_LOAD</td>
+<td class="p-table-cell-padding whitespace-nowrap text-primary">Completed</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors">
+<td class="p-table-cell-padding whitespace-nowrap text-on-surface-variant">2023-10-24T07:45:33Z</td>
+<td class="p-table-cell-padding whitespace-nowrap">Purchase Orders</td>
+<td class="p-table-cell-padding whitespace-nowrap">DELTA_EXTRACT</td>
+<td class="p-table-cell-padding whitespace-nowrap text-error">Failed</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="p-table-cell-padding whitespace-nowrap text-on-surface-variant">2023-10-24T07:00:00Z</td>
+<td class="p-table-cell-padding whitespace-nowrap">Purchase Orders</td>
+<td class="p-table-cell-padding whitespace-nowrap">INIT_SYNC</td>
+<td class="p-table-cell-padding whitespace-nowrap text-primary">Completed</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full h-16 z-50 flex justify-around items-center px-2 bg-surface-container dark:bg-surface-container border-t border-outline-variant dark:border-outline-variant md:hidden">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label text-label">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">package_2</span>
+<span class="font-label text-label">Stock</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label text-label">Charts</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label text-label">Orders</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container dark:bg-primary-container dark:text-on-primary-container rounded-lg px-3 py-1 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">cloud_sync</span>
+<span class="font-label text-label">Sync</span>
+</button>
+</nav>
+</body></html>
