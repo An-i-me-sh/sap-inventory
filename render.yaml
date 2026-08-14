@@ -2,6 +2,7 @@ services:
   - type: web
     name: sap-inventory-backend
     env: python
+    plan: free
     buildCommand: "cd backend && pip install -r requirements.txt"
     startCommand: "cd backend && gunicorn -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:$PORT"
     envVars:
@@ -17,6 +18,7 @@ services:
   - type: web
     name: sap-inventory-frontend
     env: static
+    plan: free
     buildCommand: "cd frontend && npm install && npm run build"
     staticPublishPath: "./frontend/dist"
     envVars:
@@ -27,3 +29,4 @@ databases:
   - name: sap-inventory-db
     databaseName: sap_inventory
     user: sap_admin
+    plan: free
