@@ -56,17 +56,43 @@ app.add_middleware(
 @app.on_event("startup")
 async def auto_seed_on_startup():
     """Auto-seed the database with demo data if it's empty or under-seeded."""
+    import importlib.util
+    from app.database import SessionLocal
+    from app.models import Material, Sale
+
+    db = SessionLocal()
     try:
-        seed_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "seed.py")
-        if os.path.exists(seed_path):
-            sys.path.insert(0, os.path.dirname(seed_path))
-            from seed import seed_database
-            logger.info("Checking if database needs seeding...")
-            seed_database()
+        mat_count = db.query(Material).count()
+        sale_count = db.query(Sale).count()
+        logger.info(f"[SEED CHECK] Materials: {mat_count}, Sales: {sale_count}")
+
+        if mat_count >= 450 and sale_count >= 5000:
+            logger.info("[SEED CHECK] Database already fully seeded. Skipping.")
+            return
+
+        logger.info("[SEED] Starting auto-seed of demo data...")
+
+        # Resolve seed.py path: works from backend/ or backend/app/
+        candidates = [
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "seed.py"),
+            os.path.join(os.getcwd(), "seed.py"),
+            os.path.join(os.getcwd(), "backend", "seed.py"),
+        ]
+        seed_path = next((p for p in candidates if os.path.exists(p)), None)
+
+        if seed_path:
+            logger.info(f"[SEED] Found seed.py at: {seed_path}")
+            spec = importlib.util.spec_from_file_location("seed", seed_path)
+            seed_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(seed_module)
+            seed_module.seed_database()
+            logger.info("[SEED] Auto-seed completed successfully.")
         else:
-            logger.warning("seed.py not found, skipping auto-seed.")
+            logger.error(f"[SEED] seed.py not found in any candidate path: {candidates}")
     except Exception as e:
-        logger.error(f"Auto-seed failed (non-fatal): {e}")
+        logger.error(f"[SEED] Auto-seed failed: {e}", exc_info=True)
+    finally:
+        db.close()
 
 # Global Exception Handler
 @app.exception_handler(Exception)
