@@ -1,4 +1,6 @@
 import logging
+import sys
+import os
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -50,6 +52,21 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.on_event("startup")
+async def auto_seed_on_startup():
+    """Auto-seed the database with demo data if it's empty or under-seeded."""
+    try:
+        seed_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "seed.py")
+        if os.path.exists(seed_path):
+            sys.path.insert(0, os.path.dirname(seed_path))
+            from seed import seed_database
+            logger.info("Checking if database needs seeding...")
+            seed_database()
+        else:
+            logger.warning("seed.py not found, skipping auto-seed.")
+    except Exception as e:
+        logger.error(f"Auto-seed failed (non-fatal): {e}")
 
 # Global Exception Handler
 @app.exception_handler(Exception)

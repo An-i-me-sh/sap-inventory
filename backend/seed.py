@@ -25,8 +25,9 @@ def seed_database():
     try:
         # Check if database already has seed data
         existing_mats = db.query(Material).count()
-        if existing_mats >= 500:
-            print(f"Database already contains {existing_mats} materials. Skipping seed.")
+        existing_sales = db.query(Sale).count()
+        if existing_mats >= 450 and existing_sales >= 5000:
+            print(f"Database already fully seeded ({existing_mats} materials, {existing_sales} sales). Skipping.")
             return
 
         print("Clearing existing data...")
