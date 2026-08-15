@@ -23,6 +23,10 @@ services:
     envVars:
       - key: VITE_API_BASE_URL
         value: "https://sap-inventory-backend.onrender.com/api"
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
 
 databases:
   - name: sap-inventory-db

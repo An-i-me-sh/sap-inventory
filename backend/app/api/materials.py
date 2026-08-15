@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_
 from app.database import get_db
 from app.models import Material, Inventory, Sale, Forecast, Recommendation, Alert
-from app.schemas import MaterialOut, PaginatedResponse, SaleOut, RecommendationOut, AlertOut
+from app.schemas import MaterialOut, PaginatedResponse, SaleOut, ForecastOut, RecommendationOut, AlertOut
 from app.services.forecast_service import ForecastService
 from app.services.recommendation_service import RecommendationService
 
@@ -85,7 +85,7 @@ def get_material_detail(material_id: str, db: Session = Depends(get_db)):
         "material": MaterialOut.from_orm(mat),
         "inventory": inv,
         "sales_history": [SaleOut.from_orm(s) for s in sales],
-        "latest_forecast": recent_forecast,
+        "latest_forecast": ForecastOut.from_orm(recent_forecast) if recent_forecast else None,
         "latest_recommendation": recent_recommendation,
         "alerts": [AlertOut.from_orm(a) for a in alerts]
     }

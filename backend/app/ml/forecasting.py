@@ -59,11 +59,12 @@ class DemandForecaster:
                     "upper_bound": round(avg_daily * 1.1, 2)
                 })
 
+            total_predicted = avg_daily * horizon_days
             return {
                 "status": "success",
-                "predicted_demand": round(pred, 2),
-                "confidence_lower": round(pred * 0.9, 2),
-                "confidence_upper": round(pred * 1.1, 2),
+                "predicted_demand": round(total_predicted, 2),
+                "confidence_lower": round(total_predicted * 0.9, 2),
+                "confidence_upper": round(total_predicted * 1.1, 2),
                 "mae": 2.5,
                 "rmse": 3.8,
                 "mape": 8.5,
