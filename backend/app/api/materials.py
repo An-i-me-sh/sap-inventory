@@ -71,10 +71,9 @@ def get_material_detail(material_id: str, db: Session = Depends(get_db)):
         except Exception:
             recent_recommendation = None
 
-    # Generate ML forecast if none present
-    if not recent_forecast:
+    # Generate ML forecast if none present OR if existing one has no daily_predictions (stale record)
+    if not recent_forecast or not recent_forecast.daily_predictions:
         try:
-            # We don't need the dict output, we just need to generate and save it, then fetch the DB model
             from app.services.forecast_service import ForecastService
             ForecastService.generate_forecast(db, material_id)
             recent_forecast = db.query(Forecast).filter(Forecast.material_id == material_id).order_by(Forecast.forecast_date.desc()).first()

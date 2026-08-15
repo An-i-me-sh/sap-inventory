@@ -159,8 +159,8 @@ export default function MaterialDetailsPage() {
           </div>
           <div className="font-data-sm text-data-sm flex justify-between text-on-surface-variant bg-surface-container p-3 border border-outline-variant">
             <div>Predicted Demand: <span className="text-primary font-bold">
-              {latest_forecast?.predicted_demand !== undefined && latest_forecast?.predicted_demand !== null 
-                ? latest_forecast.predicted_demand 
+              {latest_forecast?.predicted_demand !== undefined && latest_forecast?.predicted_demand !== null
+                ? `${latest_forecast.predicted_demand} units`
                 : 'Calculating...'}
             </span></div>
             <div>Confidence Range: <span className="font-mono">
@@ -169,6 +169,12 @@ export default function MaterialDetailsPage() {
                 : '—'}
             </span></div>
           </div>
+          {latest_forecast?.model_version === 'NoData-Baseline' && (
+            <div className="flex items-center gap-2 px-3 py-2 bg-surface-container border border-outline-variant/50 text-outline font-data-sm text-[11px]">
+              <span className="material-symbols-outlined text-[14px]">info</span>
+              No sales history found for this material. Forecast shows zero baseline — add sales records to enable ML predictions.
+            </div>
+          )}
           <div className="h-44 relative border border-outline-variant/30 p-2 w-full mt-2">
             {latest_forecast?.daily_predictions && latest_forecast.daily_predictions.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">

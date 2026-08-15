@@ -9,16 +9,27 @@ class DemandForecaster:
     @staticmethod
     def train_and_predict(sales_data: list, horizon_days: int = 30) -> Dict[str, Any]:
         if not sales_data or len(sales_data) < 5:
+            # No/insufficient data — generate a zero-baseline flat forecast from today
+            daily_predictions = []
+            curr_date = datetime.datetime.utcnow()
+            for step in range(horizon_days):
+                curr_date += datetime.timedelta(days=1)
+                daily_predictions.append({
+                    "date": curr_date.strftime("%Y-%m-%d"),
+                    "predicted": 0.0,
+                    "lower_bound": 0.0,
+                    "upper_bound": 0.0
+                })
             return {
-                "status": "error",
-                "message": "Insufficient historical data",
+                "status": "success",
                 "predicted_demand": 0.0,
                 "confidence_lower": 0.0,
                 "confidence_upper": 0.0,
                 "mae": 0.0,
                 "rmse": 0.0,
                 "mape": 0.0,
-                "model_version": "RandomForest-v1.0"
+                "model_version": "NoData-Baseline",
+                "daily_predictions": daily_predictions
             }
 
         df = pd.DataFrame(sales_data)
